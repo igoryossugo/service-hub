@@ -7,16 +7,32 @@ from django.db import models
 
 
 class Seller(models.Model):
-    name = models.CharField(u'nome do comerciante', max_length=100)
+    name = models.CharField(u'nome do fornecedor', max_length=100)
+
+    class Meta:
+        verbose_name = u'fornecedor'
+        verbose_name_plural = u'fornecedores'
 
 
 class ServiceCategory(models.Model):
-    name = models.CharField(u'nome do servico', max_length=50)
+    name = models.CharField(u'categoria', max_length=50)
+
+    class Meta:
+        verbose_name = u'categoria'
+        verbose_name_plural = u'categorias'
 
 
-class ServiceReview(models.Model):
+class Service(models.Model):
+    seller = models.ForeignKey(Seller, verbose_name=u'fornecedor')
+    name = models.CharField(u'nome do serviço', max_length=100)
+    description = models.CharField(u'descricao do serviço', max_length=500)
+    price = models.DecimalField(
+        u'preco', max_digits=19, decimal_places=2
+    )
+    category = models.ForeignKey(ServiceCategory, verbose_name=u'categoria')
     rating = models.DecimalField(
-        u'nota do servico',
+        u'nota do serviço',
+        blank=True,
         decimal_places=1,
         max_digits=3,
         null=True,
@@ -25,18 +41,6 @@ class ServiceReview(models.Model):
             MaxValueValidator(Decimal('5.0'))
         ]
     )
-    comment = models.CharField(u'comentario', max_length=500)
 
-
-class Service(models.Model):
-    seller = models.ForeignKey(Seller)
-    name = models.CharField(u'nome do servico', max_length=100)
-    description = models.CharField(u'descricao do servico', max_length=500)
-    price = models.DecimalField(
-        u'preco original', max_digits=19, decimal_places=2
-    )
-    negotiated_price = models.DecimalField(
-        u'preco negociado', max_digits=19, decimal_places=2
-    )
-    category = models.ForeignKey(ServiceCategory)
-    review = models.ForeignKey(ServiceReview)
+    class Meta:
+        verbose_name = u'serviço'

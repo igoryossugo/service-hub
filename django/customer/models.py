@@ -8,3 +8,6 @@ class Customer(models.Model):
     name = models.CharField(u'nome do consumidor', max_length=200)
     cpf = models.CharField(u'cpf', max_length=30)
     email = models.EmailField(u'email do consumidor')
+
+    class Meta:
+        verbose_name = u'cliente'

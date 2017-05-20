@@ -3,3 +3,6 @@ runserver:
 
 migrate:
 	python django/manage.py migrate
+
+makemigrations:
+	python django/manage.py makemigrations

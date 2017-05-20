@@ -6,3 +6,5 @@ from django.apps import AppConfig
 
 class CustomerConfig(AppConfig):
     name = 'customer'
+    verbose_name = u'consumidor'
+    verbose_name_plural = u'consumidores'

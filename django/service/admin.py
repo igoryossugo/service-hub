@@ -8,7 +8,7 @@ from models import Seller, Service, ServiceCategory
 
 class ServiceAdmin(admin.ModelAdmin):
     search_fields = ('seller', 'name', 'category')
-    list_display = ('name', 'seller', 'category', 'review', 'price')
+    list_display = ('name', 'seller', 'category', 'rating', 'price')
 
 
 class SellerAdmin(admin.ModelAdmin):
